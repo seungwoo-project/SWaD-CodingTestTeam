@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector<int> adj[104];
+int cnt;
+int c,s,a,b;
+int visited[104];
+void go(int idx) {
+	visited[idx] = 1; // 방문처리 
+	for(int there : adj[idx]) { // idx에서 퍼져나가는 컴퓨터들 
+		if(visited[there]) continue; // 이미 전염된 컴퓨터는 건너뜀 
+		cnt++; // 전염이 안되었다면 한개의 컴퓨터가 감영되었으니 +1 
+		go(there); // 그 컴퓨터에서 전염되는 곳 찾기 
+	}
+}
+int main() {
+	cin >> c; // 컴퓨터 수 
+	cin >> s; // 쌍의 수 
+	
+	for(int i = 0 ; i < s ; i++) { // 쌍의 수 만큼 쌍 잇기 
+		cin >> a >> b;
+		adj[a].push_back(b); // a에서 b로 가는 방향 
+		adj[b].push_back(a); // b에서 a로 가는 방향 
+	}
+	
+	go(1); // 1컴퓨터에서 전염되는 컴퓨터들 
+	
+	cout << cnt;
+}
