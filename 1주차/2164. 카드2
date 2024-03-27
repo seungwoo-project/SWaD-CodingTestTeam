@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+queue<int> q; // 선입선출
+int a = 1;
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(0); cout.tie(0);
+	int n;
+	cin >> n;
+	
+	for(int i = 1 ; i <= n ; i++) {
+		q.push(i); // 1~n까지 큐에 푸쉬
+	}
+	
+	while(q.size() != 1) {
+		q.pop(); // 제일 위에꺼 삭제
+		a = q.front(); // 다음 수를 저장
+		q.pop(); // 후 삭제
+		q.push(a); // 제일 아래로 옮김
+	}
+	
+	cout << a ;
+	return 0;
+}
