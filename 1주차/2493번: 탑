@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+stack<pair<int,int>> stk;
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
+	int n;
+	cin >> n;
+	
+	stk.push({100000001,0}); // 처음 범위밖 값을 무한대로 설정
+	for(int i = 1 ; i <= n ; i++) {
+		int height;
+		cin >> height; // 탑의 길이
+		
+		while(stk.top().first < height) { // 탑의 길이가 왼쪽에 있는 탑보다 크다면 레이저에 맞지 않기때문에 없애면서 무시처리
+			stk.pop();
+		}
+  // 탑에 맞았다면 맞은 탑번호를 출력
+		cout << stk.top().second << ' ';
+  // i번째 탑을 세움
+		stk.push({height,i});
+	}
+	return 0;
+}
