@@ -1,0 +1,31 @@
+// 동석차 없이 불만도 합을 최소로
+#include <bits/stdc++.h>
+using namespace std;
+vector<pair<int,int>> ret; // 동석차 없이 등수 매기는 용
+vector<int> v;
+int a;
+int main() {
+	int n;
+	cin >> n;
+	
+	for(int i = 1 ; i <= n ; i++) {
+		cin >> a;
+		v.push_back(a); // 등수를 벡터에 담음
+	}
+	
+	sort(v.begin(), v.end()); // 등수 정렬
+	
+	for(int i = 0 ; i < n ; i++) {
+		ret.push_back({i+1, v[i]}); // 동석차 없이 순서대로 정렬된 벡터값을 넣음 
+	}
+	long long sum = 0; // 1 <= n <= 500,000 이므로 값이 큰 수가 될 수 있으므로 long long 크기로 결정
+	for(auto it : ret) {
+		if(it.first != it.second) { // 자신이 기대했던 등수가 아니라면
+			sum += abs(it.first - it.second); // 불만도 A와 B의 차이 수치화 하여 불만도 합
+		}
+	}
+	
+	cout << sum; // 불만도 합 출력
+	
+	return 0;
+}
