@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+stack<int> stk[10]; // 각각의 6줄 스택을 선언
+int na,pa,j,p;
+int cnt;
+int main() {
+	cin >> na >> pa;
+	
+	for(int i = 0 ; i < na ; i++) {
+	    cin >> j >> p;
+	    if(stk[j].empty()) { // 스택에 비어있다면
+	        stk[j].push(p);
+	        cnt++;
+	    } else { // 비어있지 않다면
+	        if(p > stk[j].top()) { // 스택탑에 있는값이 들어오는 값보다 작을경우
+	            stk[j].push(p); cnt++; 
+	        } else if(p == stk[j].top()) { // 스택탑에 있는값과 들어오는 값이 같다면
+	            continue; // 아무런 조치 취하지 않음
+	        } else { // 스택탑에 있는값이 들어오는 값보다 큰경우 
+	            while(!stk[j].empty() && stk[j].top() > p) { // 스택이 비어있지않고 스택탑이 들어오는 값보다 작을때 까지 pop시키고 cnt++
+	                stk[j].pop();
+	                cnt++;
+	            }
+	            if(!stk[j].empty() && stk[j].top() == p) { // 스택이 비어있지 않고 스택탑이 들어오는 값이랑 같다면 무시
+	                continue;
+	            } 
+              // 스택탑이 비어있거나 스택탑에 있는값이 들어오는 값보다 작을경우 스택에 넣고 cnt++
+	            stk[j].push(p);
+	            cnt++;
+	            
+	        }
+	    }
+	}
+	
+	cout << cnt;
+	return 0;
+}
